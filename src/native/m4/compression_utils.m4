@@ -41,10 +41,10 @@ AC_CACHE_CHECK([Checking for the 'actual' dynamic-library for '-l$1'], ac_cv_lib
     dnl Try otool, objdump and ldd in that order to get the dynamic library
     if test ! -z "`which otool | grep -v 'no otool'`"; then
       ac_cv_libname_$1=\"`otool -L conftest | grep $1 | sed -e 's/^[	 ]*//' -e 's/ .*//'`\";
+    elif test ! -z "`which ldd | grep -v 'no ldd'`"; then
+      ac_cv_libname_$1=`ldd conftest | $AWK '/$1/ { print "\""$[]3"\"" }'`
     elif test ! -z "`which objdump | grep -v 'no objdump'`"; then
       ac_cv_libname_$1="`objdump -p conftest | grep NEEDED | grep $1 | sed 's/\W*NEEDED\W*\(.*\)\W*$/\"\1\"/'`"
-    elif test ! -z "`which ldd | grep -v 'no ldd'`"; then
-      ac_cv_libname_$1="`ldd conftest | grep $1 | sed 's/^[[[^A-Za-z0-9]]]*\([[[A-Za-z0-9\.]]]*\)[[[^A-Za-z0-9]]]*=>.*$/\"\1\"/'`"
     else
       AC_MSG_ERROR(Can't find either 'objdump' or 'ldd' to compute the dynamic library for '-l$1')
     fi
