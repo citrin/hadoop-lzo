@@ -89,6 +89,10 @@
 
   <property name="make.cmd" value="make"/>
 
+  <!-- for build native lib -->
+  <property environment="env" />
+  <property name="env.LOCALBASE" value="/usr" />
+
   <!-- IVY properties set here -->
   <property name="ivy.dir" location="ivy" />
   <loadproperties srcfile="${ivy.dir}/libraries.properties"/>
@@ -249,6 +253,8 @@
        <env key="OS_ARCH" value="${os.arch}"/>
        <env key="JVM_DATA_MODEL" value="${sun.arch.data.model}"/>
        <env key="NATIVE_SRCDIR" value="${native.src.dir}"/>
+       <env key="CPPFLAGS" value="-I${env.LOCALBASE}/include"/>
+       <env key="LDFLAGS"  value="-L${env.LOCALBASE}/lib"/>
        <arg line="${native.src.dir}/configure"/>
     </exec>
 
