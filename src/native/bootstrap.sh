@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-DIR=$(dirname $BASH_SOURCE)
+DIR=$(dirname $0)
 cd $DIR
 
 aclocal -Im4
