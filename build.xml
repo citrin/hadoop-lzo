@@ -28,7 +28,7 @@
  
   <property name="Name" value="Hadoop GPL Compression"/>
   <property name="name" value="hadoop-lzo"/>
-  <property name="version" value="0.4.14"/>
+  <property name="version" value="0.4.15"/>
   <property name="final.name" value="${name}-${version}"/>
   <property name="year" value="2011"/>
 
@@ -246,11 +246,13 @@
   	   verbose="yes">
       <class name="com.hadoop.compression.lzo.LzoCompressor" />
       <class name="com.hadoop.compression.lzo.LzoDecompressor" />
+      <classpath refid="classpath"/>
     </javah>
 
     <exec dir="${build.native}" executable="sh" failonerror="true">
        <env key="OS_NAME" value="${os.name}"/>
        <env key="OS_ARCH" value="${os.arch}"/>
+       <env key="LDFLAGS" value="-Wl,--no-as-needed"/>
        <env key="JVM_DATA_MODEL" value="${sun.arch.data.model}"/>
        <env key="NATIVE_SRCDIR" value="${native.src.dir}"/>
        <env key="CPPFLAGS" value="-I${env.LOCALBASE}/include"/>
